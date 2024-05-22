@@ -35,6 +35,7 @@ import info.plateaukao.einkbro.preference.TouchAreaType.BottomLeftRight
 import info.plateaukao.einkbro.preference.TouchAreaType.Left
 import info.plateaukao.einkbro.preference.TouchAreaType.MiddleLeftRight
 import info.plateaukao.einkbro.preference.TouchAreaType.Right
+import info.plateaukao.einkbro.preference.TouchAreaType.TopBottom
 import info.plateaukao.einkbro.preference.toggle
 import info.plateaukao.einkbro.view.compose.MyTheme
 import org.koin.core.component.KoinComponent
@@ -102,6 +103,11 @@ fun TouchAreaContent(
                 iconResId = R.drawable.ic_touch_left
             ) { onTouchTypeClick(Left) }
             TouchAreaItem(
+                state = touchAreaType == BottomLeftRight,
+                titleResId = R.string.bottom,
+                iconResId = R.drawable.ic_touch_left_right
+            ) { onTouchTypeClick(BottomLeftRight) }
+            TouchAreaItem(
                 state = touchAreaType == Right,
                 titleResId = R.string.touch_right_side,
                 iconResId = R.drawable.ic_touch_right
@@ -114,15 +120,15 @@ fun TouchAreaContent(
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             TouchAreaItem(
+                state = touchAreaType == TopBottom,
+                titleResId = R.string.touch_area_topbottom,
+                iconResId = R.drawable.ic_touch_topbottom
+            ) { onTouchTypeClick(TopBottom) }
+            TouchAreaItem(
                 state = touchAreaType == MiddleLeftRight,
                 titleResId = R.string.middle,
                 iconResId = R.drawable.ic_touch_middle_left_right
             ) { onTouchTypeClick(MiddleLeftRight) }
-            TouchAreaItem(
-                state = touchAreaType == BottomLeftRight,
-                titleResId = R.string.bottom,
-                iconResId = R.drawable.ic_touch_left_right
-            ) { onTouchTypeClick(BottomLeftRight) }
             TouchAreaItem(
                 state = touchAreaType == TouchAreaType.Long,
                 titleResId = R.string.touch_area_long,

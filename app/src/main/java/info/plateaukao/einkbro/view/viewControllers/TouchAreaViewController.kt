@@ -136,6 +136,13 @@ class TouchAreaViewController(
                 touchAreaDragCustomize = rootView.findViewById(R.id.touch_area_middle_drag)
             }
 
+            TouchAreaType.TopBottom -> {
+                touchAreaPageUp = rootView.findViewById(R.id.touch_area_long_top)
+                touchAreaPageDown = rootView.findViewById(R.id.touch_area_long_bottom)
+                touchAreaDragCustomize = rootView.findViewById(R.id.touch_area_middle_drag)
+                touchAreaDragCustomize.visibility = View.GONE
+            }
+
             TouchAreaType.Left -> {
                 touchAreaPageUp = rootView.findViewById(R.id.touch_area_left_1)
                 touchAreaPageDown = rootView.findViewById(R.id.touch_area_left_2)
