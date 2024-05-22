@@ -57,10 +57,12 @@ class TouchAreaDialogFragment() : ComposeDialogFragment(), KoinComponent {
                 },
                 showHint = config.touchAreaHint,
                 hideTouchWhenType = config.hideTouchAreaWhenInput,
+                enableTouchWhenRead = config.enableTouchWhenRead,
                 switchTouchArea = config.switchTouchAreaAction,
                 enableTouchAreaAsArrowKey = config.longClickAsArrowKey,
                 onShowHintClick = { config::touchAreaHint.toggle() },
                 onHideWhenTypeClick = { config::hideTouchAreaWhenInput.toggle() },
+                onEnableWhenTouchClick = { config::enableTouchWhenRead.toggle() },
                 onSwitchAreaClick = { config::switchTouchAreaAction.toggle() },
                 onCloseClick = { dismiss() },
                 onAsArrowKeyClick = { config::longClickAsArrowKey.toggle() }
@@ -78,9 +80,11 @@ fun TouchAreaContent(
     showHint: Boolean = true,
     hideTouchWhenType: Boolean = true,
     switchTouchArea: Boolean = false,
+    enableTouchWhenRead: Boolean = false,
     enableTouchAreaAsArrowKey: Boolean = false,
     onShowHintClick: () -> Unit = {},
     onHideWhenTypeClick: () -> Unit = {},
+    onEnableWhenTouchClick: () -> Unit = {},
     onSwitchAreaClick: () -> Unit = {},
     onCloseClick: () -> Unit = {},
     onAsArrowKeyClick: () -> Unit = {},
@@ -138,6 +142,11 @@ fun TouchAreaContent(
             titleResId = R.string.hie_touch_area_when_input,
             iconResId = -1,
             onClicked = { onHideWhenTypeClick() })
+        ToggleItem(
+            state = enableTouchWhenRead,
+            titleResId = R.string.enable_touch_when_reader_mode,
+            iconResId = -1,
+            onClicked = { onEnableWhenTouchClick() })
         ToggleItem(
             state = switchTouchArea,
             titleResId = R.string.switch_touch_area_action,

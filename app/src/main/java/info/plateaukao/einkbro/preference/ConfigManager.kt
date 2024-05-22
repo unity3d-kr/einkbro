@@ -71,6 +71,7 @@ class ConfigManager(
     var switchTouchAreaAction by BooleanPreference(sp, K_TOUCH_AREA_ACTION_SWITCH, false)
     var longClickAsArrowKey by BooleanPreference(sp, K_TOUCH_AREA_ARROW_KEY, false)
     var hideTouchAreaWhenInput by BooleanPreference(sp, K_TOUCH_AREA_HIDE_WHEN_INPUT, false)
+    var enableTouchWhenRead by BooleanPreference(sp, K_TOUCH_AREA_ENABLE_WHEN_READ, false)
     var customFontChanged by BooleanPreference(sp, K_CUSTOM_FONT_CHANGED, false)
     var debugWebView by BooleanPreference(sp, K_DEBUG_WEBVIEW, false)
     var shouldShowTabBar by BooleanPreference(sp, K_SHOW_TAB_BAR, false)
@@ -607,6 +608,7 @@ class ConfigManager(
         const val K_TOUCH_AREA_ACTION_SWITCH = "sp_touch_area_action_switch"
         const val K_TOUCH_AREA_ARROW_KEY = "sp_touch_area_arrow_key"
         const val K_TOUCH_AREA_HIDE_WHEN_INPUT = "sp_touch_area_hide_when_input"
+        const val K_TOUCH_AREA_ENABLE_WHEN_READ = "sp_touch_area_enable_when_read"
         const val K_SAVED_EPUBS = "sp_saved_epubs"
         const val K_MULTITOUCH = "sp_multitouch"
         const val K_CUSTOM_FONT = "sp_custom_font"

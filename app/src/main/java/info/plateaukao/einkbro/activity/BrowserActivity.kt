@@ -553,7 +553,13 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
     override fun jumpToBottom() = ninjaWebView.jumpToBottom()
     override fun pageDown() = ninjaWebView.pageDownWithNoAnimation()
     override fun pageUp() = ninjaWebView.pageUpWithNoAnimation()
-    override fun toggleReaderMode() = ninjaWebView.toggleReaderMode()
+    override fun toggleReaderMode() {
+        ninjaWebView.toggleReaderMode()
+        if (config.enableTouchWhenRead) {
+            config.enableTouchTurn = ninjaWebView.isReaderModeOn
+            updateTouchView()
+        }
+    } 
     override fun toggleVerticalRead() = ninjaWebView.toggleVerticalRead()
     override fun updatePageInfo(info: String) = composeToolbarViewController.updatePageInfo(info)
 
