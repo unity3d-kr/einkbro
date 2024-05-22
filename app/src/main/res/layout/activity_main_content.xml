@@ -66,6 +66,26 @@
         android:background="@drawable/touch_area_border"
         android:visibility="invisible" />
 
+
+    <View
+        android:id="@+id/touch_area_long_top"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginBottom="-2dp"
+        android:background="@drawable/touch_area_border"
+        android:visibility="invisible" />
+
+    <View
+        android:id="@+id/touch_area_long_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginBottom="-2dp"
+        android:background="@drawable/touch_area_border"
+        android:visibility="invisible" />
+        
     <View
         android:id="@+id/touch_area_middle_drag"
         android:layout_width="40dp"
