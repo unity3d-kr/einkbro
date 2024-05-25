@@ -147,25 +147,29 @@ object HelperUnit {
                     data = uri
                 } ?: return
 
-            val shortcutManager =
-                context.getSystemService(ShortcutManager::class.java) ?: return
-            var icon: Icon = if (bitmap != null) {
-                Icon.createWithBitmap(bitmap)
-            } else {
-                Icon.createWithResource(context, R.drawable.qc_bookmarks)
-            }
+            if (Build.VERSION.SDK_INT >= 26) {
+                val shortcutManager =
+                        context.getSystemService(ShortcutManager::class.java) ?: return
+                var icon: Icon = if (bitmap != null) {
+                    Icon.createWithBitmap(bitmap)
+                } else {
+                    Icon.createWithResource(context, R.drawable.qc_bookmarks)
+                }
 
-            if (shortcutManager.isRequestPinShortcutSupported) {
-                val pinShortcutInfo = ShortcutInfo.Builder(context, uri.toString())
-                    .setShortLabel(title!!)
-                    .setLongLabel(title)
-                    .setIcon(icon)
-                    .setIntent(intent)
-                    .build()
-                shortcutManager.requestPinShortcut(pinShortcutInfo, null)
-            } else {
-                println("failed_to_add")
+                if (shortcutManager.isRequestPinShortcutSupported) {
+                    val pinShortcutInfo = ShortcutInfo.Builder(context, uri.toString())
+                            .setShortLabel(title!!)
+                            .setLongLabel(title)
+                            .setIcon(icon)
+                            .setIntent(intent)
+                            .build()
+                    shortcutManager.requestPinShortcut(pinShortcutInfo, null)
+                } else {
+                    println("failed_to_add")
+                }
             }
+            else
+                println("low api version")
         } catch (e: Exception) {
             println("failed_to_add")
         }
