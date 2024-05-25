@@ -783,6 +783,7 @@ open class NinjaWebView(
         evaluateJavascript(
             "javascript:(function() {" +
                     "document.body.innerHTML = document.innerHTMLCache;" +
+                    "document.body.outerHTML = document.outerHTMLCache;" +
                     "document.body.classList.remove(\"mozac-readerview-body\");" +
                     verticalCssString +
                     "window.scrollTo(0, 0);" +
@@ -1043,6 +1044,7 @@ open class NinjaWebView(
             var documentClone = document.cloneNode(true);
             var article = new Readability(documentClone, {classesToPreserve: preservedClasses}).parse();
             document.innerHTMLCache = document.body.innerHTML;
+            document.outerHTMLCache = document.body.outerHTML;
 
             article.readingTime = getReadingTime(article.length, document.lang);
 
