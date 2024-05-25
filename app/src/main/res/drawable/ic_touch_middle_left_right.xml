@@ -4,7 +4,7 @@
         android:pathData="M2.5,2.5h240v360h-240z"
         android:strokeColor="?attr/colorControlNormal" android:strokeWidth="5"/>
     <path android:fillColor="#00000000"
-        android:pathData="M4.42,331.18L242.5,328.66"
+        android:pathData="M4.42,331.18L242.5,331.18"
         android:strokeColor="?attr/colorControlNormal" android:strokeWidth="3"/>
     <path android:fillColor="#00000000"
         android:pathData="M2.5,118.5h60v112.5h-60z"
