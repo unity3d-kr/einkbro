@@ -262,6 +262,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
     override fun refreshAction() {
         if (ninjaWebView.isLoadFinish && ninjaWebView.url?.isNotEmpty() == true) {
             ninjaWebView.reload()
+            disableTouchTurnAfterReaderMode()
         } else {
             ninjaWebView.stopLoading()
         }
@@ -560,6 +561,11 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
             updateTouchView()
         }
     } 
+    private fun disableTouchTurnAfterReaderMode()
+    {
+        if (config.enableTouchWhenRead)
+            config.enableTouchTurn = false
+    }
     override fun toggleVerticalRead() = ninjaWebView.toggleVerticalRead()
     override fun updatePageInfo(info: String) = composeToolbarViewController.updatePageInfo(info)
 
@@ -869,6 +875,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
         ) {
             if (!ninjaWebView.shouldUseReaderFont()) {
                 ninjaWebView.reload()
+                disableTouchTurnAfterReaderMode()
             } else {
                 ninjaWebView.updateCssStyle()
             }
@@ -960,6 +967,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
             // disable back key when it's translate mode web page
             if (!ninjaWebView.isTranslatePage && ninjaWebView.canGoBack()) {
                 ninjaWebView.goBack()
+                disableTouchTurnAfterReaderMode()
             } else {
                 if (config.closeTabWhenNoMoreBackHistory) {
                     removeAlbum()
@@ -979,6 +987,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
                 // if it's the same controller, just scroll to top
                 if (ninjaWebView.isAtTop()) {
                     ninjaWebView.reload()
+                    disableTouchTurnAfterReaderMode()
                 } else {
                     jumpToTop()
                 }
@@ -1508,6 +1517,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
                 ConfigManager.K_FONT_TYPE -> {
                     if (config.fontType == FontType.SYSTEM_DEFAULT) {
                         ninjaWebView.reload()
+                        disableTouchTurnAfterReaderMode()
                     } else {
                         ninjaWebView.updateCssStyle()
                     }
@@ -1516,6 +1526,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
                 ConfigManager.K_READER_FONT_TYPE -> {
                     if (config.readerFontType == FontType.SYSTEM_DEFAULT) {
                         ninjaWebView.reload()
+                        disableTouchTurnAfterReaderMode()
                     } else {
                         ninjaWebView.updateCssStyle()
                     }
@@ -1537,6 +1548,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
                         ninjaWebView.updateCssStyle()
                     } else {
                         ninjaWebView.reload()
+                        disableTouchTurnAfterReaderMode()
                     }
                 }
 
@@ -1546,16 +1558,21 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
                         ninjaWebView.updateCssStyle()
                     } else {
                         ninjaWebView.reload()
+                        disableTouchTurnAfterReaderMode()
                     }
                 }
 
-                ConfigManager.K_ENABLE_IMAGE_ADJUSTMENT -> ninjaWebView.reload()
+                ConfigManager.K_ENABLE_IMAGE_ADJUSTMENT -> {
+                    ninjaWebView.reload()
+                    disableTouchTurnAfterReaderMode()
+                }
 
                 ConfigManager.K_WHITE_BACKGROUND -> {
                     if (config.whiteBackground) {
                         ninjaWebView.updateCssStyle()
                     } else {
                         ninjaWebView.reload()
+                        disableTouchTurnAfterReaderMode()
                     }
                 }
 
@@ -1591,6 +1608,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
                 ConfigManager.K_DESKTOP -> {
                     ninjaWebView.updateUserAgentString()
                     ninjaWebView.reload()
+                    disableTouchTurnAfterReaderMode()
                     composeToolbarViewController.updateIcons()
                 }
 
@@ -1605,6 +1623,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
                 ConfigManager.K_ENABLE_CUSTOM_USER_AGENT -> {
                     ninjaWebView.updateUserAgentString()
                     ninjaWebView.reload()
+                    disableTouchTurnAfterReaderMode()
                 }
 
                 ConfigManager.K_ENABLE_TOUCH -> {
@@ -1725,6 +1744,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
         FastToggleDialogFragment {
             ninjaWebView.initPreferences()
             ninjaWebView.reload()
+            disableTouchTurnAfterReaderMode()
         }.show(supportFragmentManager, "fast_toggle_dialog")
     }
 
@@ -2197,7 +2217,10 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
 
                 KeyEvent.KEYCODE_J -> ninjaWebView.pageDownWithNoAnimation()
                 KeyEvent.KEYCODE_K -> ninjaWebView.pageUpWithNoAnimation()
-                KeyEvent.KEYCODE_H -> ninjaWebView.goBack()
+                KeyEvent.KEYCODE_H -> {
+                    ninjaWebView.goBack()
+                    disableTouchTurnAfterReaderMode()
+                }
                 KeyEvent.KEYCODE_L -> ninjaWebView.goForward()
                 KeyEvent.KEYCODE_R -> showTranslation()
                 KeyEvent.KEYCODE_D -> removeAlbum()
@@ -2266,6 +2289,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
                 if (domain.isNotBlank()) {
                     config.adSites = config.adSites.apply { add(domain) }
                     ninjaWebView.reload()
+                    disableTouchTurnAfterReaderMode()
                 }
             }
         }
@@ -2277,6 +2301,7 @@ open class BrowserActivity : FragmentActivity(), BrowserController {
             okAction = {
                 config.adSites = config.adSites.apply { remove(url) }
                 ninjaWebView.reload()
+                disableTouchTurnAfterReaderMode()
             }
         )
     }
